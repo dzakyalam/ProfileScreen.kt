@@ -1,0 +1,76 @@
+package com.example.profileapp
+
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+// Perbaikan: Import tema yang sesuai dengan nama proyek Anda.
+import com.example.profileapp.ui.theme.ProfileAppTheme
+
+
+class MainActivity : ComponentActivity() {
+   override fun onCreate(savedInstanceState: Bundle?) {
+       super.onCreate(savedInstanceState)
+       setContent {
+           // Perbaikan: Gunakan tema yang sesuai dengan nama proyek Anda.
+           ProfileAppTheme {
+               Surface(
+                   modifier = Modifier.fillMaxSize(),
+                   color = MaterialTheme.colorScheme.background
+               ) {
+                   // Ganti "Nama Mahasiswa" dengan nama Anda.
+                   GreetingApp("Dzaky Alam")
+               }
+           }
+       }
+   }
+}
+
+
+@Composable
+fun GreetingApp(mahasiswaName: String) {
+   // Menggunakan state untuk menyimpan teks yang akan ditampilkan.
+   var textToShow by remember { mutableStateOf("Silakan tekan tombol") }
+
+
+   Column(
+       modifier = Modifier
+           .fillMaxSize()
+           .padding(16.dp),
+       verticalArrangement = Arrangement.Center,
+       horizontalAlignment = Alignment.CenterHorizontally
+   ) {
+       // Teks yang menampilkan pesan.
+       Text(text = textToShow, style = MaterialTheme.typography.headlineMedium)
+
+
+       Spacer(modifier = Modifier.height(16.dp))
+
+
+       // Tombol yang akan mengubah nilai 'textToShow' saat diklik.
+       Button(
+           onClick = {
+               textToShow = "Halo $mahasiswaName"
+           }
+       ) {
+           Text("Tampilkan Nama")
+       }
+   }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+   // Perbaikan: Gunakan tema yang sesuai dengan nama proyek Anda untuk pratinjau.
+   ProfileAppTheme {
+       GreetingApp("Dzaky Alam")
+   }
+}
